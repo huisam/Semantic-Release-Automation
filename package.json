@@ -1,19 +1,46 @@
 {
+  "name": "semantic-test",
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
+    "conventional-changelog-conventionalcommits": "^4.6.3",
+    "gradle-semantic-release-plugin": "1.7.2",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
+    "pinst": "^3.0.0",
+    "prettier": "^2.6.2",
+    "semantic-release": "19.0.2"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.md,package.json": [
+      "prettier --write"
+    ]
+  },
   "release": {
+    "tagFormat": "${version}",
     "branches": [
-      "main",
-      "next"
+      {
+        "name": "master"
+      }
     ],
     "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
       "gradle-semantic-release-plugin",
       [
-        "@semantic-release/git",
+        "@semantic-release/github",
         {
           "assets": [
-            "gradle.properties"
+            "build/libs/*.jar"
           ]
         }
       ]
     ]
+  },
+  "engines": {
+    "node": "^16.13.0"
   }
 }
