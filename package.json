@@ -1,5 +1,19 @@
 {
   "release": {
-    "branches": ["main", "next"]
+    "branches": [
+      "main",
+      "next"
+    ],
+    "plugins": [
+      "gradle-semantic-release-plugin",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "gradle.properties"
+          ]
+        }
+      ]
+    ]
   }
 }
